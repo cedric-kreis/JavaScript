@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <script>
+  /*Script permettant d'enlever les balises "h5" et le boutton ceci afin d'avoir
+  une meilleure présentation */
+    $(document).ready(function(){
+    $("button").click(function(){
+        $("h5").remove();
+      });
+    });
+
+    $(document).ready(function(){
+    $("button").click(function(){
+        $("button").remove();
+      });
+    });
+  </script>
+
+  <title>Suite de Fibonacci</title>
+
+  <style type="text/css">
+
+  .header {
+    padding: 10px 16px;
+    background: #555;
+    color: #f1f1f1;
+
+  }
+
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
+  body {
+  background-color: lightblue;
+    }
+
+  html {
+      text-align: center
+    }
+
+
+    button {
+    	width:85px;
+    	height:85px;
+    	background:#cc0000;
+    	font:bold 13px Arial;
+    	border-radius:50%;
+    	border:none;
+    	color:#fff;
+    }
+
+
+  </style>
+</head>
+
+<html>
+
+
+  <body>
+
+    <div class="header" id="myHeader">
+      <h1>Suite de Fibonacci</h1>
+    </div>
+
+    <h5>Bienvenu!!!</h5>
+    <h5>Après avoir cliqué sur le bouton, veuillez indiquer un chiffre ou un nombre pour
+     effectuer l'opération mathématique!</h5>
+    <button onclick="Fibo()">Don't worry, just click me</button>
+    <p id="affichage"></p>
+
+
+<script>
+
+function Fibo() {
+//Demande à l'utilisateur le nombre de d'itération pour la suite de Fibonacci
+var rang = prompt("Suite de Fibonacci, Entrez un nombre", "100");
+
+/*Si l'utilisateur n'a pas entrer un int, une popup s'ouvre pour lui indiquer son
+erreur, ensuite la page se rafraîchit et rouvre une popup de saisie */
+  if(isNaN(rang)){
+    alert("Il faut un chiffre ou un nombre!");
+    window.location.reload(false);
+  }
+/*Si le champ est viode, une popup s'ouvre pour lui indiquer l'erreur,
+ensuite la page se rafraîchit et rouvre une popup de saisie */
+  else if (rang == "") {
+    alert("Entrez un nombre ou un chiffre s'il vous plaît!");
+    window.location.reload(false);
+  }
+  else if (rang >= 1478){
+    alert("Le nombre est trop grand et ne peut être traîté. Entrez un nombre inférieure à 1478");
+    window.location.reload(false);
+  }
+  // Le programme continue à faire ce qu'il doit faire. Calculer la suite de Fibonacci
+  else{
+
+    const myArray = []
+
+    var a = 0;
+    var b = 1;
+
+    //Boucle permettant l'itération de l'algorithme
+    for (var i = 1; i <= rang; i++) {
+
+      //Algorithme pour le calcule de la suite de Fibonacci
+      temporaire = a;
+      a = a + b;
+      b = temporaire;
+
+      //Contôle des int afin d'écrire le mot au singulier ou au pluriel
+      if(temporaire > 1){
+        mot = " lapins"
+      }
+      else{
+        mot = " lapin"
+        }
+
+      //le résultat est inséré dans un tableau pour le formattage de l'affichage
+      myArray.push(temporaire + mot + "<br>");
+
+      // le ".join" permet de suppprimer les "," pour un affichage plus sobre
+      document.getElementById("affichage").innerHTML = myArray.join("");
+
+    }
+  }
+}
+
+window.onscroll = function() {myFunction()};
+
+var header = document.getElementById("myHeader");
+var sticky = header.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+}
+
+</script>
+
+  </body>
+</html>
